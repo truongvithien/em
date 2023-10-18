@@ -36,10 +36,6 @@ const config = {
             filename: './index.html',
             template: 'src/html/layout/index.html.twig',
         }),
-        new HtmlWebpackPlugin({
-            filename: './other.html',
-            template: 'src/html/layout/other.html.twig',
-        }),
         new CopyPlugin({
             patterns: [
                 { from: "src/assets", to: "assets" },
@@ -72,7 +68,7 @@ const config = {
                 use: [stylesHandler, 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif|gltf)$/i,
+                test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif|gltf|exr)$/i,
                 type: 'asset/resource',
             },
 

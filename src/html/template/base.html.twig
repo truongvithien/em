@@ -7,25 +7,9 @@
     </title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo">
-                <a href="#">T</a>
-            </div> 
-            {% include "../component/menu.html.twig" %}
-            <div class="avatar"> 
-                <img src="./assets/images/1.jpg" width="40px" height="40px" /> 
-                ThienTV
-            </div>                                                                                                                                                                                                                                                                                                        
-        </div>
-        <div class="content">
-            {% block content %}
-                Base Content
-            {% endblock %}
-        </div>
-        <div class="footer">
-            <p>&copy; 2023 - All Rights Reserved - ThienTV</p>
-        </div>
-    </div>
+
+    {% block content %}
+        Base Content
+    {% endblock %}
 </body>
 </html>
