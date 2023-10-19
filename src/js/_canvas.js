@@ -83,7 +83,8 @@ const Canvas = {
     },
     addHDR: function(opts) {
         const defs = {
-            src: './assets/hdr/industrial_sunset_puresky_1k.exr'
+            src: './assets/hdr/industrial_sunset_puresky_1k.exr',
+            intensity: 1
         };
 
         const sets = Object.assign({}, defs, opts);
@@ -92,7 +93,7 @@ const Canvas = {
         pmremGenerator.compileEquirectangularShader();
 
         new RGBELoader()
-            .setDataType(THREE.UnsignedByteType)
+            .setDataType(THREE.HalfFloatType)
             .load(sets.src, function(texture) {
                 const envMap = pmremGenerator.fromEquirectangular(texture).texture;
                 scene.background = envMap;
@@ -104,6 +105,35 @@ const Canvas = {
         
 
     
+    },
+    addSphere: function(opts) {
+        const defs = {
+            radius: 5,
+            position: {
+                x: 0,
+                y: 0,
+                z: 0
+            },
+            color: 0x00ff00
+        };
+
+        const sets = Object.assign({}, defs, opts);
+
+        const geometry = new THREE.SphereGeometry(sets.radius, 32, 32);
+        const material = new THREE.MeshBasicMaterial({color: sets.color});
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(sets.position.x, sets.position.y, sets.position.z);
+        mesh.material.side = THREE.DoubleSide;
+        scene.add(mesh);
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+            mesh.rotation.x += 0.01;
+            mesh.rotation.y += 0.02;
+        }
+        animate();
+        
+        return mesh;
     },
     addBox: function(opts) {
         const defs = {

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 import Canvas from "./_canvas";
 
@@ -19,9 +20,30 @@ const flowerMaterial = new THREE.MeshPhysicalMaterial({
     transparent: true,
 });
 
+
 Canvas.addHDR({
-    src: './assets/hdr/HDR_029_Sky_Cloudy_Ref.hdr'
+    src: './assets/hdr/industrial_sunset_puresky_1k.hdr',
+    intensity: 1.5
 });
+
+
+const sphere = Canvas.addSphere({
+    radius: 15,
+    position: {
+        x: 0,
+        y: 0,
+        z: 0
+    }
+});
+sphere.material.side = THREE.BackSide;
+// Load GLTF material from file into sphere.material
+const gltfLoader = new GLTFLoader();
+gltfLoader.load('./assets/textures/grass_medium_01_2k.gltf/grass_medium_01_2k.gltf', function(gltf) {
+    // sphere.material = gltf.scene.children[0].material;
+});
+
+
+console.log(sphere);
 
 Canvas.addModel({
     modelName: 'model',
