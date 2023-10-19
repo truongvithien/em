@@ -18,7 +18,7 @@ const flowerMaterial = new THREE.MeshPhysicalMaterial({
     side: THREE.DoubleSide,
     normalRepeat: new THREE.Vector2(0.5, 0.5),
     transparent: true,
-});
+}); 
 
 
 Canvas.addHDR({
@@ -27,23 +27,43 @@ Canvas.addHDR({
 });
 
 
-const sphere = Canvas.addSphere({
-    radius: 15,
-    position: {
-        x: 0,
-        y: 0,
-        z: 0
+// const sphere = Canvas.addSphere({
+//     radius: 15,
+//     position: {
+//         x: 0,
+//         y: 0,
+//         z: 0
+//     }
+// });
+// sphere.material.side = THREE.BackSide;
+// Load GLTF material from file into sphere.material
+// const gltfLoader = new GLTFLoader();
+// gltfLoader.load('./assets/textures/grass_medium_01_2k.gltf/grass_medium_01_2k.gltf', function(gltf) {
+//     sphere.material = gltf.scene.children[0].material;
+// });
+
+
+// console.log(sphere);
+
+
+Canvas.addModel({
+    modelName: 'model',
+    src: './assets/textures/grass_medium_01_2k.gltf/grass_medium_01_2k.gltf', 
+    callback: function(scene, model) {
+
+        model.scale.set(1, 1, 1);
+        model.position.set(0, -10, 0);
+        model.rotation.set(0, 0, 0);
+
+        console.log(model);
+
+
+        // model.children[0].material = flowerMaterial;
+
+        scene.add(model);
+
     }
 });
-sphere.material.side = THREE.BackSide;
-// Load GLTF material from file into sphere.material
-const gltfLoader = new GLTFLoader();
-gltfLoader.load('./assets/textures/grass_medium_01_2k.gltf/grass_medium_01_2k.gltf', function(gltf) {
-    // sphere.material = gltf.scene.children[0].material;
-});
-
-
-console.log(sphere);
 
 Canvas.addModel({
     modelName: 'model',
